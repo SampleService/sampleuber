@@ -2,6 +2,9 @@ package com.septemberhx.uber.controller;
 
 import com.septemberhx.common.bean.MResponse;
 import com.septemberhx.mclient.annotation.MFuncDescription;
+import com.septemberhx.uber.utils.MBaseUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,10 +20,18 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class MainController {
 
+    private Logger logger = LogManager.getLogger(this);
+
     @PostMapping(path = "/rent")
     @ResponseBody
     @MFuncDescription(value = "rent", level = 1)
     public MResponse rent(@RequestBody MResponse params, HttpServletRequest request) {
-        return MResponse.successResponse();
+
+        boolean r = MBaseUtils.verDepRequest("pay", 20, request, logger);
+
+        if (!r) {
+            return MResponse.failResponse();
+        }
+        return MBaseUtils.generateResInKBSize(13);
     }
 }

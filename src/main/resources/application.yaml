@@ -10,8 +10,8 @@ mvf4ms:
         - id: pay
           function: pay
           slas:
-            - 1
             - 2
+            - 3
 
 server:
   port: 8080
