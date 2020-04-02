@@ -24,10 +24,24 @@ public class MainController {
 
     @PostMapping(path = "/rent")
     @ResponseBody
-    @MFuncDescription(value = "rent", level = 1)
+    @MFuncDescription(value = "rent", level = 2)
     public MResponse rent(@RequestBody MResponse params, HttpServletRequest request) {
 
-        boolean r = MBaseUtils.verDepRequest("pay", 20, request, logger);
+        boolean r = MBaseUtils.verDepRequest("pay", 6, request, logger);
+
+        if (!r) {
+            return MResponse.failResponse();
+        }
+        return MBaseUtils.generateResInKBSize(19);
+    }
+
+    @PostMapping(path = "/taxi")
+    @ResponseBody
+    @MFuncDescription(value = "taxi", level = 2)
+    public MResponse taxi(@RequestBody MResponse params, HttpServletRequest request) {
+
+        boolean r = MBaseUtils.verDepRequest("navigation", 9, request, logger)
+                && MBaseUtils.verDepRequest("pay", 6, request, logger);
 
         if (!r) {
             return MResponse.failResponse();

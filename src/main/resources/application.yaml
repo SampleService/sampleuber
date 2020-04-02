@@ -3,14 +3,17 @@ spring:
     name: SampleUber
 
 mvf4ms:
-  version: 1.3.1
+  version: 2.2.3
   dependencies:
     - name: dependency1
       dependence:
         - id: pay
           function: pay
           slas:
-            - 2
+            - 3
+        - id: navigation
+          function: navigation
+          slas:
             - 3
 
 server:
