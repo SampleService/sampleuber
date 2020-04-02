@@ -33,7 +33,7 @@ public class MBaseUtils {
     }
 
     public static boolean verDepRequest(String depId, int kbSize, HttpServletRequest request, Logger logger) {
-        MResponse r1 = MVerRequestUtils.request(depId, com.septemberhx.didi.utils.MBaseUtils.generateResInKBSize(kbSize), RequestMethod.POST, request);
+        MResponse r1 = MVerRequestUtils.request(depId, generateResInKBSize(kbSize), RequestMethod.POST, request);
         if (r1 == null || r1.isFailed()) {
             logger.error("Failed to perform [weather] dep request");
             return false;
